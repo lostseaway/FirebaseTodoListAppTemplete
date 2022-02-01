@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		9E3517E727A6F950009EC1CD /* FirebaseToDoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3517E627A6F950009EC1CD /* FirebaseToDoListApp.swift */; };
-		9E3517E927A6F950009EC1CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3517E827A6F950009EC1CD /* ContentView.swift */; };
 		9E3517EB27A6F952009EC1CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3517EA27A6F952009EC1CD /* Assets.xcassets */; };
 		9E3517EE27A6F952009EC1CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3517ED27A6F952009EC1CD /* Preview Assets.xcassets */; };
+		9E3517F627A6FA06009EC1CD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3517F527A6FA06009EC1CD /* LoginView.swift */; };
+		9E3517F827A6FD11009EC1CD /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3517F727A6FD11009EC1CD /* TodoListView.swift */; };
+		9E3517FA27A6FD86009EC1CD /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3517F927A6FD86009EC1CD /* TaskRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9E3517E327A6F950009EC1CD /* FirebaseToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E3517E627A6F950009EC1CD /* FirebaseToDoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseToDoListApp.swift; sourceTree = "<group>"; };
-		9E3517E827A6F950009EC1CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9E3517EA27A6F952009EC1CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E3517ED27A6F952009EC1CD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9E3517F527A6FA06009EC1CD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9E3517F727A6FD11009EC1CD /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
+		9E3517F927A6FD86009EC1CD /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +55,8 @@
 		9E3517E527A6F950009EC1CD /* FirebaseToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				9E3517F427A6F963009EC1CD /* Views */,
 				9E3517E627A6F950009EC1CD /* FirebaseToDoListApp.swift */,
-				9E3517E827A6F950009EC1CD /* ContentView.swift */,
 				9E3517EA27A6F952009EC1CD /* Assets.xcassets */,
 				9E3517EC27A6F952009EC1CD /* Preview Content */,
 			);
@@ -65,6 +69,16 @@
 				9E3517ED27A6F952009EC1CD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9E3517F427A6F963009EC1CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E3517F527A6FA06009EC1CD /* LoginView.swift */,
+				9E3517F727A6FD11009EC1CD /* TodoListView.swift */,
+				9E3517F927A6FD86009EC1CD /* TaskRowView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +97,8 @@
 			dependencies = (
 			);
 			name = FirebaseToDoList;
+			packageProductDependencies = (
+			);
 			productName = FirebaseToDoList;
 			productReference = 9E3517E327A6F950009EC1CD /* FirebaseToDoList.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +127,8 @@
 				Base,
 			);
 			mainGroup = 9E3517DA27A6F950009EC1CD;
+			packageReferences = (
+			);
 			productRefGroup = 9E3517E427A6F950009EC1CD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +155,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E3517E927A6F950009EC1CD /* ContentView.swift in Sources */,
+				9E3517F627A6FA06009EC1CD /* LoginView.swift in Sources */,
 				9E3517E727A6F950009EC1CD /* FirebaseToDoListApp.swift in Sources */,
+				9E3517FA27A6FD86009EC1CD /* TaskRowView.swift in Sources */,
+				9E3517F827A6FD11009EC1CD /* TodoListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
