@@ -13,32 +13,50 @@ struct TodoListView: View {
         case add
     }
     
+    @Binding var isLoggedIn: Bool
+    
     @State var newTaskTitle: String = ""
     @State var isAddingNewTask = false
     @FocusState private var textFieldFocus: Field?
+    
+    @ObservedObject var viewModel: TodoListViewModel
+    
+    init(viewModel: TodoListViewModel = TodoListViewModel(), isLoggedIn: Binding<Bool>) {
+        self.viewModel = viewModel
+        self._isLoggedIn = isLoggedIn
+    }
     
     var body: some View {
         NavigationView {
             ZStack {
                 List {
                     Section("Todo") {
-                        // TODO: Handle Dynamic Todo task
-                        TaskRowView(title: "Doing Task", isCompleted: false)
+                        ForEach(viewModel.todoTasks) { task in
+                            TaskRowView(task: task, viewModel: viewModel)
+                        }.onDelete(perform: { indexSet in
+                            let index = indexSet[indexSet.startIndex]
+                            viewModel.removeTask(task: viewModel.todoTasks[index])
+                        })
+                        
                         if isAddingNewTask {
                             TextField("Add Your new Task!", text: $newTaskTitle)
                                 .focused($textFieldFocus, equals: .add)
                                 .onSubmit {
+                                    viewModel.addTask(title: newTaskTitle)
+                                    
                                     isAddingNewTask = false
                                     newTaskTitle = ""
-                                    
-                                    // TODO: Handle Create task
                                 }.padding()
                         }
                     }
 
                     Section("Done") {
-                        // TODO: Handle Dynamic Done task
-                        TaskRowView(title: "Done Task", isCompleted: true)
+                        ForEach(viewModel.doneTasks) { task in
+                            TaskRowView(task: task, viewModel: viewModel)
+                        }.onDelete(perform: { indexSet in
+                            let index = indexSet[indexSet.startIndex]
+                            viewModel.removeTask(task: viewModel.doneTasks[index])
+                        })
                     }
                 }
                 
@@ -54,12 +72,16 @@ struct TodoListView: View {
                     }
                 }
             }.navigationTitle("My Todo List")
-                .toolbar(content: {
+            .toolbar(content: {
                     Button(action: {
-                        // TODO: Handle User Sign Out
+                        viewModel.signout()
+                        isLoggedIn = false
                     }, label: {
                         Label("", systemImage: "rectangle.portrait.and.arrow.right").foregroundColor(.red)
                     })
+                })
+                .onAppear(perform: {
+                    viewModel.initListener()
                 })
             
         }
@@ -69,7 +91,7 @@ struct TodoListView: View {
 struct TodoListView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            TodoListView()
+            TodoListView(isLoggedIn: Binding.constant(true))
         }
     }
 }

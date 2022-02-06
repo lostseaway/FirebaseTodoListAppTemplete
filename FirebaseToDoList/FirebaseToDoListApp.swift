@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct FirebaseToDoListApp: App {
+    @State var isLoggedIn: Bool
+    
+    init() {
+        FirebaseApp.configure()
+        isLoggedIn = Auth.auth().currentUser != nil
+    }
+    
     var body: some Scene {
         WindowGroup {
-            TodoListView()
+            if !isLoggedIn {
+                LoginView(isLoggedIn: $isLoggedIn)
+            }
+            else {
+                TodoListView(isLoggedIn: $isLoggedIn)
+            }
         }
     }
 }

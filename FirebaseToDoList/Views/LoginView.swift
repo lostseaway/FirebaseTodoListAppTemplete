@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var email = ""
-    @State var password = ""
+    @State var email = "abc@gg.com"
+    @State var password = "123456"
+    @State var isAlertPresented = false
+    
+    @State var alertTitle = ""
+    @State var alertMessage = ""
+    
+    @ObservedObject var viewModel: LoginViewModel
+    
+    @Binding var isLoggedIn: Bool
+    
+    init(viewModel: LoginViewModel = LoginViewModel(), isLoggedIn: Binding<Bool>) {
+        self.viewModel = viewModel
+        self._isLoggedIn = isLoggedIn
+    }
     
     var body: some View {
         ZStack {
@@ -29,30 +42,52 @@ struct LoginView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        // TODO: Implement Login Function
+                        viewModel.login(email: email, password: password, completion: { isSuccess, message in
+                            if(isSuccess) {
+                                alertTitle = "Success"
+                                alertMessage = "Login Successful!"
+                                isAlertPresented = true
+                                viewModel.isLoggedIn = true
+                            }
+                            else {
+                                alertTitle = "Fail"
+                                alertMessage = message ?? ""
+                                isAlertPresented = true
+                            }
+                        })
                     }, label: { Label("Login", systemImage: "chevron.right") })
                 }.padding()
                 
                 HStack {
                     Spacer()
                     Button(action: {
-                        // TODO: Implement Sign Up Function
+                        viewModel.signup(email: email, password: password, completion: { isSuccess, message in
+                            print(message ?? "")
+                        })
                     }, label: { Label("Sign Up", systemImage: "chevron.right") })
                 }.padding()
                 
             }.background(.white)
                 .cornerRadius(20)
                 .padding()
+                .alert(isPresented: $isAlertPresented, content: {
+                    Alert(
+                        title: Text(alertTitle),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("Ok"),
+                                                action: {
+                                                    isLoggedIn = viewModel.isLoggedIn
+                                                }))
+
+                })
                 
-            // TODO: Notify User when Login / Signup Unsuccess
         }
     }
-    
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(isLoggedIn: Binding.constant(false))
     }
 }
 

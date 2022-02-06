@@ -9,25 +9,25 @@ import SwiftUI
 
 struct TaskRowView: View {
     
-    let title: String
-    let isCompleted: Bool
+    let task: Task
+    let viewModel: TodoListViewModel
     
     var body: some View {
         HStack(spacing: 12) {
             Button(action: {
-                // TODO: Handle Completed Task
+                viewModel.markCompleted(task: task)
             }) {
-                Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
+                Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                     .resizable()
                     .frame(width: 20, height: 20)
-                    .foregroundColor(isCompleted ? Color.green : Color.gray)
+                    .foregroundColor(task.isCompleted ? Color.green : Color.gray)
             }
             .buttonStyle(PlainButtonStyle())
-            if isCompleted {
-                Text(title).strikethrough().foregroundColor(.gray)
+            if task.isCompleted {
+                Text(task.title).strikethrough().foregroundColor(.gray)
             }
             else {
-                Text(title)
+                Text(task.title)
             }
             
             Spacer()
